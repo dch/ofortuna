@@ -30,7 +30,7 @@ func main() {
 	log.Print("Starting O Fortuna!")
 
 	http.HandleFunc("/", Handler)
-	http.ListenAndServe(server, nil)
+	log.Fatal(http.ListenAndServe(server, nil))
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
