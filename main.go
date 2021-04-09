@@ -14,10 +14,9 @@ const server string = ":1999"
 func main() {
 	log.Print("Starting O Fortuna!")
 
-	http.HandleFunc("/", Handler)
-	log.Fatal(http.ListenAndServe(server, nil))
+	log.Fatal(server.Server(server, handler))
 }
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, fortunes.GetRandomFortune())
 }
