@@ -15,4 +15,3 @@ a go powered fortune server
 - [ ] add a healthcheck while we load many fortunes
 - [ ] add signal handlers
 - [ ] add graceful shutdown
-

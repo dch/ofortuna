@@ -1,4 +1,4 @@
-package fortunes
+package ofortuna
 
 // with thanks to Carl Orff
 // https://en.wikipedia.org/wiki/O_Fortuna

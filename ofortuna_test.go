@@ -1,9 +1,9 @@
-package fortunes_test
+package ofortuna_test
 
 import (
 	"testing"
 
-	"github.com/dch/ofortuna/fortunes"
+	"ofortuna"
 )
 
 func TestGetRandomFortunes(t *testing.T) {
@@ -12,11 +12,11 @@ func TestGetRandomFortunes(t *testing.T) {
 		name string
 		want string
 	}{
-		{name: "returns a string", want: fortunes.O_Fortuna},
+		{name: "returns a string", want: ofortuna.O_Fortuna},
 	}
 
 	for _, tc := range testCases {
-		got := fortunes.GetRandomFortune()
+		got := ofortuna.GetRandomFortune()
 		if tc.want != got {
 			t.Errorf("%v: wanted %v, got %v", tc.name, tc.want, got)
 		}
