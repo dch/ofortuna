@@ -17,6 +17,10 @@ potestatem
 dissolvit ut glaciem.
 `
 
+type fortuneSet struct {
+	fortune []string
+}
+
 func GetRandomFortune() string {
-	return (O_Fortuna)
+	return O_Fortuna
 }

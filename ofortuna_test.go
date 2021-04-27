@@ -8,17 +8,22 @@ import (
 
 func TestGetRandomFortunes(t *testing.T) {
 	t.Parallel()
-	testCases := []struct {
-		name string
-		want string
-	}{
-		{name: "returns a string", want: ofortuna.O_Fortuna},
+	var got string = ofortuna.GetRandomFortune()
+	if len(got) == 0 {
+		t.Errorf("want non-empty fortune")
+	}
+}
+
+func TestNewFortuneTellerReadsFortunes(t *testing.T) {
+	// TODO construct input reader from testdata/quotes.fortune
+	ft, err := ofortuna.NewFortuneTeller(input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	wantLen := 10
+	gotLen := ft.Len()
+	if wantLen != gotLen {
+		t.Errorf("want %d fortunes, got %d", wantLen, gotLen)
 	}
 
-	for _, tc := range testCases {
-		got := ofortuna.GetRandomFortune()
-		if tc.want != got {
-			t.Errorf("%v: wanted %v, got %v", tc.name, tc.want, got)
-		}
-	}
 }
