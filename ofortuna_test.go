@@ -1,29 +1,26 @@
 package ofortuna_test
 
 import (
-	"testing"
-
+	"math/rand"
 	"ofortuna"
+	"strings"
+	"testing"
 )
 
 func TestGetRandomFortunes(t *testing.T) {
 	t.Parallel()
-	var got string = ofortuna.GetRandomFortune()
-	if len(got) == 0 {
-		t.Errorf("want non-empty fortune")
-	}
-}
-
-func TestNewFortuneTellerReadsFortunes(t *testing.T) {
-	// TODO construct input reader from testdata/quotes.fortune
-	ft, err := ofortuna.NewFortuneTeller(input)
+	var fortunes = strings.NewReader("foo bar baz")
+	ft, err := ofortuna.NewFortuneTeller(fortunes)
 	if err != nil {
 		t.Fatal(err)
 	}
-	wantLen := 10
-	gotLen := ft.Len()
-	if wantLen != gotLen {
-		t.Errorf("want %d fortunes, got %d", wantLen, gotLen)
-	}
 
+	// use a known seed so we can deterministically validate our fortunes
+	ft.Random = rand.New(rand.NewSource(3))
+
+	want := "something"
+	var got string = ft.GetRandomFortune()
+	if want != got {
+		t.Fatalf("wanted %q, got %q", want, got)
+	}
 }
