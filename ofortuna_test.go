@@ -37,9 +37,9 @@ func TestGetRandomFortunes(t *testing.T) {
 	}
 
 	// use a known seed so we can deterministically validate our fortunes
-	ft.Random = rand.New(rand.NewSource(3))
+	ft.Random = rand.New(rand.NewSource(4))
 
-	want := "something"
+	want := "velut luna\nstatu variabilis,\nsemper crescis\naut decrescis;\n"
 	var got string = ft.GetRandomFortune()
 	if want != got {
 		t.Fatalf("wanted %q, got %q", want, got)
@@ -48,7 +48,6 @@ func TestGetRandomFortunes(t *testing.T) {
 
 func TestFortunesFromReader(t *testing.T) {
 	t.Parallel()
-
 	want := []string{
 		"O Fortuna!\n",
 		"velut luna\nstatu variabilis,\nsemper crescis\naut decrescis;\n",

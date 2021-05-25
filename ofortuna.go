@@ -2,9 +2,9 @@ package ofortuna
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"math/rand"
+	"time"
 )
 
 type fortuneTeller struct {
@@ -15,8 +15,10 @@ type fortuneTeller struct {
 func NewFortuneTeller(r io.Reader) (fortuneTeller, error) {
 	var ft = fortuneTeller{
 		Fortune: []string{},
+		Random: rand.New(rand.NewSource(time.Now().UnixNano())),
 	}
 	scanner := bufio.NewScanner(r)
+	scanner.Split(bufio.ScanLines)
 	var fortune, line string
 	for scanner.Scan() {
 		line = scanner.Text()
@@ -25,7 +27,6 @@ func NewFortuneTeller(r io.Reader) (fortuneTeller, error) {
 			continue
 		}
 		ft.Fortune = append(ft.Fortune, fortune)
-		fmt.Printf("fortune %q\n", fortune)
 		fortune = ""
 	}
 	if scanner.Err() != nil {
@@ -35,6 +36,7 @@ func NewFortuneTeller(r io.Reader) (fortuneTeller, error) {
 	return ft, nil
 }
 
-func (fortuneTeller) GetRandomFortune() string {
-	return ""
+func (ft fortuneTeller) GetRandomFortune() string {
+	index := ft.Random.Intn(len(ft.Fortune))
+	return ft.Fortune[index]
 }
