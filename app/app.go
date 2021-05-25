@@ -14,10 +14,11 @@ func ListenAndServe(address string) error {
 		fmt.Fprintln(w, ofortuna.GetRandomFortune())
 	})
 	s := &http.Server{
-		Addr: address,
+		Addr:         address,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
-		IdleTimeout:  120 * time.Second,			    Handler: mux,
+		IdleTimeout:  120 * time.Second,
+		Handler:      mux,
 	}
 	return s.ListenAndServe()
 }
