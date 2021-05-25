@@ -63,3 +63,22 @@ func TestFortunesFromReader(t *testing.T) {
 		t.Fatal(cmp.Diff(want, got))
 	}
 }
+
+func TestNewFortuneTellerFromFile(t *testing.T) {
+	t.Parallel()
+	var ft ofortuna.FortuneTeller
+	ft, err := ofortuna.NewFortuneTellerFromFile("testdata/quotes.fortune")
+	if err != nil {
+		t.Fatal(err)
+	}
+	wantLen := 10
+	gotLen := len(ft.Fortune)
+	if wantLen != gotLen {
+		t.Fatalf("want %d fortunes, got %d", wantLen, gotLen)
+	}
+	wantFortune := "What is a master but a master student?\n—Neil Peart"
+	gotFortune := ft.Fortune[2]
+	if wantFortune != gotFortune {
+		t.Fatalf("want %q, got %q", wantFortune, gotFortune)
+	}
+}

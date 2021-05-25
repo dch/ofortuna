@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-type fortuneTeller struct {
+type FortuneTeller struct {
 	Fortune []string
 	Random *rand.Rand
 }
 
-func NewFortuneTeller(r io.Reader) (fortuneTeller, error) {
-	var ft = fortuneTeller{
+func NewFortuneTeller(r io.Reader) (FortuneTeller, error) {
+	var ft = FortuneTeller{
 		Fortune: []string{},
 		Random: rand.New(rand.NewSource(time.Now().UnixNano())),
 	}
@@ -30,13 +30,13 @@ func NewFortuneTeller(r io.Reader) (fortuneTeller, error) {
 		fortune = ""
 	}
 	if scanner.Err() != nil {
-		return fortuneTeller{}, scanner.Err()
+		return FortuneTeller{}, scanner.Err()
 	}
 	ft.Fortune = append(ft.Fortune, fortune)
 	return ft, nil
 }
 
-func (ft fortuneTeller) GetRandomFortune() string {
+func (ft FortuneTeller) GetRandomFortune() string {
 	index := ft.Random.Intn(len(ft.Fortune))
 	return ft.Fortune[index]
 }
